@@ -2,9 +2,9 @@ package com.desafio.backend.entities.enums;
 
 public enum PhoneType {
 
-	RESIDENTIAL_NUMBER(1),
-	MOBILE_NUMBER(2),
-	WORKING_NUMBER(3);
+	RESIDENTIAL_NUMBER(0),
+	MOBILE_NUMBER(1),
+	WORKING_NUMBER(2);
 	
 	private int code;
 	

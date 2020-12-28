@@ -1,17 +1,14 @@
 package com.desafio.backend.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.desafio.backend.entities.enums.AccountType;
 
 @Entity
 @Table(name = "tb_user")
@@ -22,53 +19,38 @@ public class User implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String name;
-	
-	private String cpf;
-	
+	private String username;
 	private String password;
-	
-	@OneToMany(mappedBy = "user")
-	private Set<Phone> phones = new HashSet<>();
-	
-	@OneToMany(mappedBy = "user")
-	private Set<Address> addresses = new HashSet<>();
-	
-	/*
-	private Set<T> emails = new HashSet<>();
-	*/
-	
-	public User() {
-	}
-	
-	
+	private Integer accountType;
 
-	public User(Long id, String name, String cpf, String password) {
+	public User() {
+		
+	}
+
+	public User(Long id, String username, String password, Integer accountType) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.cpf = cpf;
+		this.username = username;
 		this.password = password;
+		this.accountType = accountType;
 	}
 
-
-
-	public String getName() {
-		return name;
+	public Long getId() {
+		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -76,28 +58,22 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-
-	public Set<Phone> getPhones() {
-		return phones;
+	
+	public AccountType getAccountType() {
+		return AccountType.valueOf(accountType);
 	}
 
-	public Set<Address> getAddresses() {
-		return addresses;
+	public void AccountType(AccountType accountType) {
+		if(accountType != null) {
+			this.accountType = accountType.getCode();
+		}
 	}
-
-	/*public Set<T> getEmails() {
-		return emails;
-	}*/
-
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -110,10 +86,10 @@ public class User implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!cpf.equals(other.cpf))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

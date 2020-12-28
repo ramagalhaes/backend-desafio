@@ -25,21 +25,19 @@ public class Phone implements Serializable{
 	private String number;
 	private Integer phoneType;
 	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	private String ddd;
 	
 	public Phone() {
 		
 	}
 
-	public Phone(Long id,String number, Integer phoneType, User user) {
+	public Phone(Long id,String number, String ddd, Integer phoneType) {
 		super();
 		this.id = id;
 		this.number = number;
-		this.phoneType = phoneType;
-		this.user = user;
+		this.ddd = ddd;
+		this.phoneType = phoneType;	
+		
 	}
 
 	public Long getId() {
@@ -57,6 +55,7 @@ public class Phone implements Serializable{
 	public void setNumber(String number) {
 		this.number = number;
 	}
+	
 
 	public PhoneType getPhoneType() {
 		return PhoneType.valueOf(phoneType);
@@ -68,12 +67,13 @@ public class Phone implements Serializable{
 		}
 	}
 
-	public User getUser() {
-		return user;
+
+	public String getDdd() {
+		return ddd;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
 	}
 
 	@Override

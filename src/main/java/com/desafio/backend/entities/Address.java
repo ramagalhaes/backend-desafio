@@ -28,21 +28,21 @@ public class Address implements Serializable{
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "client_id")
+	private Client client;
 	
 	public Address() {
 		
 	}
 	
-	public Address(Long id, String street, String uf, String city, String district, User user) {
+	public Address(Long id, String street, String uf, String city, String district, Client client) {
 		super();
 		this.id = id;
 		this.street = street;
 		this.uf = uf;
 		this.city = city;
 		this.district = district;
-		this.user = user;
+		this.client = client;
 	}
 
 
@@ -59,7 +59,7 @@ public class Address implements Serializable{
 	}
 
 	public void setStreet(String street) {
-		street = street;
+		this.street = street;
 	}
 
 	public String getUf() {
@@ -86,12 +86,12 @@ public class Address implements Serializable{
 		this.district = district;
 	}
 
-	public User getUser() {
-		return user;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	@Override
