@@ -95,6 +95,20 @@ public class Client implements Serializable{
 	public Set<String> getEmails() {
 		return emails;
 	}
+	
+	public void setPhones(Set<Phone> phones) {
+		this.phones = phones;
+	}
+
+
+	public void setAddresses(Set<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+
+	public void setEmails(Set<String> emails) {
+		this.emails = emails;
+	}
 
 
 	@Override

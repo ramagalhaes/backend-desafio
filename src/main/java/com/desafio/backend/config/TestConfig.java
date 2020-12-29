@@ -1,6 +1,8 @@
 package com.desafio.backend.config;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,40 +26,54 @@ public class TestConfig implements CommandLineRunner{
 	private ClientRepository clientRepository;
 	
 	@Autowired
-	private PhoneRepository phoneRepository;
-	
-	@Autowired 
-	private AddressRepository addressRepository;
-	
-	@Autowired
 	private UserRepository userRepository;
 	
 	
 	@Override
 	public void run(String... args) throws Exception {
 		
-		User u1 = new User(null, "admin", "123456", 1);
-		User u2 = new User(null, "comum", "123456", 2);
+		Set<Integer> set1 = new HashSet<>();
+		Set<Integer> set2 = new HashSet<>();
+		
+		set1.add(1);
+		set1.add(2);
+		
+		set2.add(2);
+		
+		Set<Address> sa1 = new HashSet<>();
+		Set<Address> sa2 = new HashSet<>();
+		Address ad1 = new Address(null, "Qn07 conjunto 18 casa 37", "DF", "Riacho Fundo 1", "Brasília", null, "71805718");
+		Address ad2 = new Address(null, "Qn05 conjunto 23 casa 12", "DF", "Riacho Fundo 1", "Brasília", null, "71805718");
+		sa1.add(ad1);
+		sa2.add(ad2);
+		
+		Set<Phone> sp1 = new HashSet<>();
+		Set<Phone> sp2 = new HashSet<>();
+		Phone p1 = new Phone(null,"99998888","061",0);
+		Phone p2 = new Phone(null,"99997777","061",2);
+		sp1.add(p1);
+		sp2.add(p2);
+		
+		Set<String> se1 = new HashSet<>();
+		Set<String> se2 = new HashSet<>();
+		String e1 = "raphael.gol@hotmail.com";
+		String e2 = "raphael@gmail.com";
+		String e3 = "raphael@yahoo.com";
+		se1.add(e1);
+		se2.add(e2);
+		se2.add(e3);
+		
+		
+		
+		User u1 = new User(null, "admin", "123456",set1);
+		User u2 = new User(null,"comum","123456",set2);
 	
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		
-		Client c1 = new Client(null,"Raphael Magalhães", "12345678901",null,null,null);
-		Client c2 = new Client(null,"Walter Pereira", "78945612307",null,null,null);
+		Client c1 = new Client(null,"Raphael Magalhães", "12345678901",sp1,sa1,se1);
+		Client c2 = new Client(null,"Walter Pereira", "78945612307",sp2,sa2,se2);
 		
 		clientRepository.saveAll(Arrays.asList(c1, c2));
 		
-		/*Address a1 = new Address(null,"QN07 Conjunto 18 Casa 37", "DF", "Brasilia", "Riacho Fundo 1",c1);
-		Phone p1 = new Phone(null,"983601455", 2, c1);
-		
-		phoneRepository.save(p1);
-		addressRepository.save(a1);
-		
-		
-		c1.getPhones().add(p1);
-		clientRepository.save(c1);
-		
-
-		c1.getAddresses().add(a1);
-		clientRepository.save(c1);		*/
 	}
 }

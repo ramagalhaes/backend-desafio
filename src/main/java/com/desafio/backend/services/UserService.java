@@ -30,7 +30,7 @@ public class UserService {
 			if(user.getUsername() == username) {
 				return user;
 			}
-		}throw new IllegalArgumentException("user doesnt exist");
+		}throw new IllegalArgumentException("user does not exist");
 				
 	}
 }

@@ -1,14 +1,24 @@
 package com.desafio.backend.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.desafio.backend.entities.enums.AccountType;
+
+
 
 @Entity
 @Table(name = "tb_user")
@@ -21,18 +31,23 @@ public class User implements Serializable{
 	
 	private String username;
 	private String password;
-	private Integer accountType;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name="account_type", joinColumns = @JoinColumn(name = "user_id"))
+	@Column(name = "type")
+	private Set<Integer> accountTypes = new HashSet<>();
 
 	public User() {
 		
 	}
 
-	public User(Long id, String username, String password, Integer accountType) {
+	public User(Long id, String username, String password, Set<Integer> accountType) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.accountType = accountType;
+		this.accountTypes = accountType;
+		
 	}
 
 	public Long getId() {
@@ -59,16 +74,14 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
-	public AccountType getAccountType() {
-		return AccountType.valueOf(accountType);
+	public Set<AccountType> getAccountTypes() {
+		return accountTypes.stream().map(x -> AccountType.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void AccountType(AccountType accountType) {
-		if(accountType != null) {
-			this.accountType = accountType.getCode();
-		}
+	public void addAccountType(AccountType accountType) {
+		accountTypes.add(accountType.getCode());
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

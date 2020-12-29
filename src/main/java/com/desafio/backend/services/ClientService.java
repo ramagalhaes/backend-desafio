@@ -47,5 +47,8 @@ public class ClientService {
 	private void updateClient(Client entity, Client client) {
 		entity.setCpf(client.getCpf());
 		entity.setName(client.getName());
+		entity.setAddresses(client.getAddresses());
+		entity.setEmails(client.getEmails());
+		entity.setPhones(client.getPhones());
 	}
 }

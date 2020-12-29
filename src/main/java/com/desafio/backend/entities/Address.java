@@ -25,6 +25,7 @@ public class Address implements Serializable{
 	private String uf;
 	private String city;
 	private String district;
+	private String zipCode;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -35,7 +36,7 @@ public class Address implements Serializable{
 		
 	}
 	
-	public Address(Long id, String street, String uf, String city, String district, Client client) {
+	public Address(Long id, String street, String uf, String city, String district, Client client, String zipCode) {
 		super();
 		this.id = id;
 		this.street = street;
@@ -43,6 +44,7 @@ public class Address implements Serializable{
 		this.city = city;
 		this.district = district;
 		this.client = client;
+		this.zipCode = zipCode;
 	}
 
 
@@ -88,6 +90,14 @@ public class Address implements Serializable{
 
 	public Client getClient() {
 		return client;
+	}
+	
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public void setClient(Client client) {
