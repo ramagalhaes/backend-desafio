@@ -1,6 +1,7 @@
 package com.desafio.backend.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.swing.text.MaskFormatter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -95,7 +97,9 @@ public class Address implements Serializable{
 	}
 	
 	public String getZipCode() {
-		return zipCode;
+		String pattern = "#####-###";
+	 	String numeroProcesso = zipCode;
+        return format(pattern, numeroProcesso) ;
 	}
 
 	public void setZipCode(String zipCode) {
@@ -138,4 +142,15 @@ public class Address implements Serializable{
 			return false;
 		return true;
 	}	
+	
+	private static String format(String pattern, Object value) {
+        MaskFormatter mask;
+        try {
+            mask = new MaskFormatter(pattern);
+            mask.setValueContainsLiteralCharacters(false);
+            return mask.valueToString(value);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

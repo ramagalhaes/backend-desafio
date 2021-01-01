@@ -1,6 +1,7 @@
 package com.desafio.backend.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.swing.text.MaskFormatter;
 
 @Entity
 @Table(name = "tb_client")
@@ -78,7 +80,9 @@ public class Client implements Serializable{
 	}
 
 	public String getCpf() {
-		return cpf;
+		 	String pattern = "###.###.###-##";
+		 	String numeroProcesso = cpf;
+	        return format(pattern, numeroProcesso) ;
 	}
 
 	public void setCpf(String cpf) {
@@ -136,4 +140,15 @@ public class Client implements Serializable{
 			return false;
 		return true;
 	}
+	
+	private static String format(String pattern, Object value) {
+        MaskFormatter mask;
+        try {
+            mask = new MaskFormatter(pattern);
+            mask.setValueContainsLiteralCharacters(false);
+            return mask.valueToString(value);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

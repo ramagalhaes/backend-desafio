@@ -47,7 +47,7 @@ public class TestConfig implements CommandLineRunner{
 		
 		Set<Phone> sp1 = new HashSet<>();
 		Set<Phone> sp2 = new HashSet<>();
-		Phone p1 = new Phone(null,"99998888","061",0);
+		Phone p1 = new Phone(null,"999998888","061",1);
 		Phone p2 = new Phone(null,"99997777","061",2);
 		sp1.add(p1);
 		sp2.add(p2);

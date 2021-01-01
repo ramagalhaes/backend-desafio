@@ -1,17 +1,16 @@
 package com.desafio.backend.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.swing.text.MaskFormatter;
 
 import com.desafio.backend.entities.enums.PhoneType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_phone")
@@ -49,7 +48,15 @@ public class Phone implements Serializable{
 	}
 
 	public String getNumber() {
-		return number;
+		if(this.phoneType == 1) {
+			String pattern = "#####-####";
+		 	String numeroProcesso = number;
+	        return format(pattern, numeroProcesso) ;
+		}else {
+			String pattern = "####-####";
+		 	String numeroProcesso = number;
+	        return format(pattern, numeroProcesso) ;
+		}
 	}
 
 	public void setNumber(String number) {
@@ -100,4 +107,15 @@ public class Phone implements Serializable{
 			return false;
 		return true;
 	}
+	
+	private static String format(String pattern, Object value) {
+        MaskFormatter mask;
+        try {
+            mask = new MaskFormatter(pattern);
+            mask.setValueContainsLiteralCharacters(false);
+            return mask.valueToString(value);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
