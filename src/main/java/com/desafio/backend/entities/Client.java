@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -34,9 +35,9 @@ public class Client implements Serializable{
 	@JoinColumn(name="client_id")
 	private Set<Phone> phones = new HashSet<>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="client_id")
-	private Set<Address> addresses = new HashSet<>();
+	private Address address;
 	
 	
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -48,14 +49,14 @@ public class Client implements Serializable{
 	}
 	
 	
-	public Client(Long id, String name, String cpf, Set<Phone> phones, Set<Address> address, Set<String> email) {
+	public Client(Long id, String name, String cpf, Set<Phone> phones, Address address, Set<String> email) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.emails = email;
 		this.phones = phones;
-		this.addresses = address;
+		this.address = address;
 	}
 	
 	public Long getId() {
@@ -88,8 +89,8 @@ public class Client implements Serializable{
 		return phones;
 	}
 
-	public Set<Address> getAddresses() {
-		return addresses;
+	public Address getAddress() {
+		return address;
 	}
 
 	public Set<String> getEmails() {
@@ -101,8 +102,8 @@ public class Client implements Serializable{
 	}
 
 
-	public void setAddresses(Set<Address> addresses) {
-		this.addresses = addresses;
+	public void setAddresses(Address address) {
+		this.address = address;
 	}
 
 

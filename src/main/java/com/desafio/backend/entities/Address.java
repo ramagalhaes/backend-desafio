@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,9 +26,10 @@ public class Address implements Serializable{
 	private String city;
 	private String district;
 	private String zipCode;
+	private String complement;
 	
 	@JsonIgnore
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
 	
@@ -36,7 +37,7 @@ public class Address implements Serializable{
 		
 	}
 	
-	public Address(Long id, String street, String uf, String city, String district, Client client, String zipCode) {
+	public Address(Long id, String street, String uf, String city, String district, Client client, String zipCode, String complement) {
 		super();
 		this.id = id;
 		this.street = street;
@@ -45,6 +46,7 @@ public class Address implements Serializable{
 		this.district = district;
 		this.client = client;
 		this.zipCode = zipCode;
+		this.complement = complement;
 	}
 
 
@@ -102,6 +104,14 @@ public class Address implements Serializable{
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	
+	public String getComplement() {
+		return complement;
+	}
+
+	public void setComplement(String complement) {
+		this.complement = complement;
 	}
 
 	@Override

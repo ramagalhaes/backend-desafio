@@ -16,8 +16,6 @@ public class ClientService {
 	@Autowired
 	private ClientRepository repository;
 	
-	@Autowired 
-	private AddressRepository addressRepository;
 	
 	public List<Client> findAll(){
 		return repository.findAll();
@@ -39,7 +37,6 @@ public class ClientService {
 	}
 	
 	public Client insert(Client client) {
-		client.getAddresses().forEach(x -> addressRepository.save(x));
 		return repository.save(client);
 	}
 
@@ -47,7 +44,7 @@ public class ClientService {
 	private void updateClient(Client entity, Client client) {
 		entity.setCpf(client.getCpf());
 		entity.setName(client.getName());
-		entity.setAddresses(client.getAddresses());
+		entity.setAddresses(client.getAddress());
 		entity.setEmails(client.getEmails());
 		entity.setPhones(client.getPhones());
 	}

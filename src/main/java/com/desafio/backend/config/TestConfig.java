@@ -40,12 +40,10 @@ public class TestConfig implements CommandLineRunner{
 		
 		set2.add(2);
 		
-		Set<Address> sa1 = new HashSet<>();
-		Set<Address> sa2 = new HashSet<>();
-		Address ad1 = new Address(null, "Qn07 conjunto 18 casa 37", "DF", "Riacho Fundo 1", "Brasília", null, "71805718");
-		Address ad2 = new Address(null, "Qn05 conjunto 23 casa 12", "DF", "Riacho Fundo 1", "Brasília", null, "71805718");
-		sa1.add(ad1);
-		sa2.add(ad2);
+	
+		Address ad1 = new Address(null, "Qn07 conjunto 18 casa 37", "DF", "Riacho Fundo 1", "Brasília", null, "71805718", null);
+		Address ad2 = new Address(null, "Qn05 conjunto 23 casa 12", "DF", "Riacho Fundo 1", "Brasília", null, "71805718", "Casa azul");
+
 		
 		Set<Phone> sp1 = new HashSet<>();
 		Set<Phone> sp2 = new HashSet<>();
@@ -70,8 +68,8 @@ public class TestConfig implements CommandLineRunner{
 	
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		
-		Client c1 = new Client(null,"Raphael Magalhães", "12345678901",sp1,sa1,se1);
-		Client c2 = new Client(null,"Walter Pereira", "78945612307",sp2,sa2,se2);
+		Client c1 = new Client(null,"Raphael Magalhães", "12345678901",sp1,ad1,se1);
+		Client c2 = new Client(null,"Walter Pereira", "78945612307",sp2,ad2,se2);
 		
 		clientRepository.saveAll(Arrays.asList(c1, c2));
 		
