@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.desafio.backend.entities.Address;
 import com.desafio.backend.entities.Client;
-import com.desafio.backend.repositories.AddressRepository;
 import com.desafio.backend.repositories.ClientRepository;
 
 @Service
@@ -49,3 +49,5 @@ public class ClientService {
 		entity.setPhones(client.getPhones());
 	}
 }
+
+

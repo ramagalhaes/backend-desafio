@@ -60,7 +60,8 @@ public class Phone implements Serializable{
 	}
 
 	public void setNumber(String number) {
-		this.number = number;
+		String unmaskedNumber = number.replaceAll("\\D", "");
+		this.number = unmaskedNumber;
 	}
 	
 

@@ -86,7 +86,8 @@ public class Client implements Serializable{
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		String unsmaskedCpf = cpf.replaceAll("\\D", "");
+		this.cpf = unsmaskedCpf;
 	}
 	
 	public Set<Phone> getPhones() {

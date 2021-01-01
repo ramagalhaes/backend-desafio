@@ -103,7 +103,8 @@ public class Address implements Serializable{
 	}
 
 	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+		String unmaskedZip = zipCode.replaceAll("\\D", "");
+		this.zipCode = unmaskedZip;
 	}
 
 	public void setClient(Client client) {
